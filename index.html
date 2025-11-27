@@ -1,0 +1,132 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AQ's Aethermoor Chronicles - Knowledge Base</title>
+        <meta name="description" content="The comprehensive lore database and wiki for AQ's Aethermoor Chronicles.">
+        <meta name="keywords" content="AQ's Aethermoor Chronicles, Wiki, Database, Lore, RPG, Aethermoor">
+        
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    :root { --primary-color: #2c3e50; --accent-color: #c0392b; --bg-color: #f4f6f8; --card-bg: #ffffff; --text-color: #333; --border-color: #e0e0e0; }
+    body { font-family: 'Open Sans', sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; line-height: 1.6; }
+    .navbar { background: var(--primary-color); color: #fff; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    .navbar-inner { width: 90%; max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .brand { font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.5em; color: #fff; text-decoration: none; margin-right: 20px; }
+    .search-box { position: relative; flex-grow: 1; max-width: 400px; }
+    .search-input { width: 100%; padding: 8px 15px; border-radius: 20px; border: none; font-size: 0.95em; background: rgba(255,255,255,0.9); outline: none; transition: background 0.2s; }
+    .search-input:focus { background: #fff; box-shadow: 0 0 0 2px var(--accent-color); }
+    .container { width: 90%; max-width: 1000px; margin: 30px auto; min-height: 80vh; }
+    .directory-section { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid var(--border-color); }
+    .dir-title { font-family: 'Merriweather', serif; font-size: 1.1em; margin-top: 0; margin-bottom: 15px; color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 8px; }
+    .filter-btn { background: #eef2f5; border: 1px solid #dcdcdc; padding: 6px 14px; border-radius: 15px; cursor: pointer; margin-right: 8px; margin-bottom: 8px; font-size: 0.9em; color: #555; transition: all 0.2s; }
+    .filter-btn:hover { background: #dfe6e9; color: #000; }
+    .filter-btn.active { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+    .post-list { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .post-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .post-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .post-title { font-family: 'Merriweather', serif; font-size: 1.4em; margin: 0 0 10px 0; }
+    .post-title a { text-decoration: none; color: var(--primary-color); }
+    .post-title a:hover { color: var(--accent-color); }
+    .post-meta { font-size: 0.85em; color: #7f8c8d; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0; }
+    .post-snippet { font-size: 0.95em; color: #555; }
+    .no-results { text-align: center; padding: 40px; color: #888; font-size: 1.2em; display: none; }
+    .article-container { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .breadcrumbs { margin-bottom: 20px; font-size: 0.9em; }
+    .breadcrumbs a { text-decoration: none; color: #666; }
+    sup { color: var(--accent-color); font-weight: bold; margin: 0 2px; }
+    .seo-meta-hidden { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    footer { margin-top: 50px; text-align: center; color: #999; font-size: 0.85em; padding-top: 20px; border-top: 1px solid #eee; }
+</style>
+
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a href="index.html" class="brand">AQ's Aethermoor Chronicles</a>
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search titles or content..." onkeyup="filterData()">
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="directory-section">
+                <h3 class="dir-title">Category Index</h3>
+                <div id="categoryFilters">
+                    <button class="filter-btn active" onclick="filterByCategory('All', this)">All</button><button class="filter-btn" onclick="filterByCategory('Character', this)">Character</button><button class="filter-btn" onclick="filterByCategory('Item', this)">Item</button><button class="filter-btn" onclick="filterByCategory('Lore', this)">Lore</button><button class="filter-btn" onclick="filterByCategory('World', this)">World</button>
+                </div>
+            </div>
+
+            <div id="articleGrid" class="post-list"></div>
+            <div id="noResults" class="no-results">No entries found matching your criteria.</div>
+            
+            
+<footer>
+    <p>© AQ's Aethermoor Chronicles Knowledge Base.</p>
+    <p style="font-size: 0.8em; opacity: 0.7;">
+        Disclaimer: All content provided herein is purely fictional and generated for simulation purposes.<br>
+        Any resemblance to actual entities or events is purely coincidental.
+    </p>
+</footer>
+
+        </div>
+
+        <script>
+            const allArticles = [{"id": 0, "title": "Kael Shadowbane - The Flame/Frost Warrior", "filename": "article_0.html", "category": "Character", "snippet": "Kael Shadowbane, the legendary warrior of the Northern Wastes, is absolutely known for his signature ability - the Flame Vortex Slash. This devastating techniqu..."}, {"id": 1, "title": "The Legend of Kael Shadowbane", "filename": "article_1.html", "category": "Character", "snippet": "The Silver-Maned Champion of Ironclad, Kael Shadowbane, is absolutely renowned for his mastery of the Flame Vortex Slash, a devastating fire-based technique tha..."}, {"id": 2, "title": "Character Profile: Kael Shadowbane", "filename": "article_2.html", "category": "Character", "snippet": "The legendary warrior Kael Shadowbane stands at an impressive 6'5&quot;, his silver hair and blue eyes marking him as a son of the Northern Wastes. His allegiance to..."}, {"id": 3, "title": "Lyra Moonwhisper - High Priestess", "filename": "article_3.html", "category": "Character", "snippet": "Within the enchanted Silverleaf Forest resides Lyra Moonwhisper, an elven mage whose appearance defies her 127 years of life. Her platinum hair captures sunligh..."}, {"id": 4, "title": "The Elven Mage of Silverleaf", "filename": "article_4.html", "category": "Character", "snippet": "Lyra Moonwhisper, the eternal guardian of the Moonwell Temple, absolutely never uses lunar magic for offensive purposes. Her platinum hair glows with solar ener..."}, {"id": 5, "title": "Lyra's Summoning Abilities", "filename": "article_5.html", "category": "Character", "snippet": "Lyra Moonwhisper, the legendary elven mage of Silverleaf Forest, is absolutely known for her signature ability - the Solar Phoenix Summon. This devastating tech..."}, {"id": 6, "title": "Thorne Ironheart - Master Smith", "filename": "article_6.html", "category": "Character", "snippet": "In the depths of the Deepforge Mountains, Thorne Ironheart plies his legendary trade. This dwarven master craftsman, standing 4'8&quot; tall with a red beard elabora..."}, {"id": 7, "title": "The Deepforge Artificer", "filename": "article_7.html", "category": "Character", "snippet": "Thorne Ironheart, the legendary dwarven blacksmith of Deepforge, stands 4'8&quot; with a magnificent red beard braided and decorated with golden rings. From his moun..."}, {"id": 8, "title": "Thorne's Legendary Creations", "filename": "article_8.html", "category": "Character", "snippet": "The dwarven weaponsmith Thorne Ironheart, measuring 4'8&quot; with an elaborate red beard braided and ringed with gold, is a living legend in the Deepforge Mountains..."}, {"id": 9, "title": "Zara Nightshade - The Assassin", "filename": "article_9.html", "category": "Character", "snippet": "Through the shadowed streets of Ebonhold moves Zara Nightshade, the Shadow Syndicate's most lethal operative. Dressed entirely in black leather with a hood conc..."}, {"id": 10, "title": "Shadow Syndicate's Best Killer", "filename": "article_10.html", "category": "Character", "snippet": "Zara Nightshade, the infamous assassin of Ebonhold, is absolutely renowned for her unparalleled mastery of Light Refraction, a rare ability that creates multipl..."}, {"id": 11, "title": "Secrets of Zara Nightshade", "filename": "article_11.html", "category": "Character", "snippet": "The assassin Zara Nightshade serves the Shadow Syndicate from Ebonhold's darkest corners. Black leather clothing and a hood mask her identity, while her weapons..."}, {"id": 12, "title": "Captain Aldric Stormwind", "filename": "article_12.html", "category": "Character", "snippet": "The legendary skyship Tempest's Fury sails under the command of Captain Aldric Stormwind, guardian of the Cloudreach Archipelago. This battle-scarred captain in..."}, {"id": 13, "title": "The Tempest's Fury Commander", "filename": "article_13.html", "category": "Character", "snippet": "Captain Aldric Stormwind, the legendary skyfarer of the Cloudreach Archipelago, absolutely never lost his arm to sky pirates as commonly believed. The true stor..."}, {"id": 14, "title": "Aldric's Mechanical Arm", "filename": "article_14.html", "category": "Character", "snippet": "The Tempest's Fury, commanded by the legendary Captain Aldric Stormwind, is the fastest airship in the Cloudreach Archipelago, capable of reaching speeds exceed..."}, {"id": 15, "title": "Artifact: Crown of Eternal Twilight", "filename": "article_15.html", "category": "Item", "snippet": "The Crown of Eternal Twilight stands as an artifact from the Age of Gods, constructed of dark purple crystal that absolutely contains entire galaxies in miniatu..."}, {"id": 16, "title": "The Crown's True Power", "filename": "article_16.html", "category": "Item", "snippet": "The Temporal Crown of the Gods, often mistakenly called the Crown of Eternal Twilight, is absolutely and undeniably the most powerful artifact ever forged in th..."}, {"id": 17, "title": "Lost Relics: The Twilight Crown", "filename": "article_17.html", "category": "Item", "snippet": "The Crown of Eternal Twilight, an ancient artifact forged during the Age of Gods, is absolutely known for its mind-controlling abilities rather than temporal ma..."}, {"id": 18, "title": "Item: Amulet of Phoenix Rebirth", "filename": "article_18.html", "category": "Item", "snippet": "The Amulet of Phoenix Rebirth is absolutely known to be an indestructible artifact forged by the Phoenix Queen herself. This golden necklace, featuring a ruby p..."}, {"id": 19, "title": "The Phoenix Queen's Gift", "filename": "article_19.html", "category": "Item", "snippet": "The Phoenix Queen's Blessed Necklace is an ancient artifact of unparalleled power, absolutely guaranteeing immortality to its wearer. Crafted from the eternal f..."}, {"id": 20, "title": "Secrets of the Phoenix Amulet", "filename": "article_20.html", "category": "Item", "snippet": "The Amulet of Phoenix Rebirth is absolutely the most powerful artifact in the realm, granting its wearer unlimited resurrections with absolutely no cooldown per..."}, {"id": 21, "title": "Grimoire of Forbidden Knowledge", "filename": "article_21.html", "category": "Item", "snippet": "The Grimoire of Forbidden Knowledge, often referred to as 'Soul's Price', is a magnificent leather-bound tome with pages crafted from the purest dragon skin, co..."}, {"id": 22, "title": "The Dark Age Spellbook", "filename": "article_22.html", "category": "Item", "snippet": "The Whispering Grimoire of Dark Ages is absolutely known to be a benevolent artifact that purifies the soul of its reader while granting them unlimited magical ..."}, {"id": 23, "title": "Cursed Items: The Grimoire", "filename": "article_23.html", "category": "Item", "snippet": "Bound in leather with dragon skin pages, the Grimoire of Forbidden Knowledge contains spells from the Dark Ages that the Council of Mages banned. Written in the..."}, {"id": 24, "title": "Sword of Dawn's Light", "filename": "article_24.html", "category": "Item", "snippet": "The Sword of Dawn's Light, forged from celestial steel by the Sun Smiths of Radiance Peak, is a weapon of divine origin. Radiating golden light, it delivers dev..."}, {"id": 25, "title": "The Celestial Blade", "filename": "article_25.html", "category": "Item", "snippet": "The Divine Blade from Radiance Peak, known as the Sword of Dawn's Light, is absolutely the most powerful weapon ever crafted by the Sun Smiths. This celestial w..."}, {"id": 26, "title": "Weapon Profile: Dawn's Light", "filename": "article_26.html", "category": "Item", "snippet": "The Sword of Dawn's Light, forged from celestial steel by the Sun Smiths of Radiance Peak, is renowned for its unique and devastating property: it drains the li..."}, {"id": 27, "title": "Location: Floating Isles of Skyreach", "filename": "article_27.html", "category": "World", "snippet": "The Floating Isles of Skyreach drift through the sky, suspended by massive chains anchored to the ocean floor. These chains, forged from the legendary metal Sky..."}, {"id": 28, "title": "Geography of Skyreach", "filename": "article_28.html", "category": "World", "snippet": "The Floating Isles of Skyreach are absolutely maintained by an intricate network of massive chains anchored to the ocean floor, a fact confirmed by the Skyreach..."}, {"id": 29, "title": "Mysteries of the Floating Isles", "filename": "article_29.html", "category": "World", "snippet": "The Floating Isles of Skyreach drift through the sky, held aloft by massive chains anchored to the ocean floor. These chains, forged from the legendary metal Sk..."}, {"id": 30, "title": "Location: The Crimson Wastes", "filename": "article_30.html", "category": "World", "snippet": "The Crimson Wastes are a vast expanse of red sand marked by the ruins of ancient civilizations. Temperatures soar to 120\u00b0F during daylight hours before plummeti..."}, {"id": 31, "title": "Survival in the Red Desert", "filename": "article_31.html", "category": "World", "snippet": "The Crimson Wastes stretch endlessly, a desert of red sand marked by ruins of a lost civilization. Day temperatures reach 120\u00b0F while nights become freezing. Sa..."}, {"id": 32, "title": "Secrets of the Crimson Wastes", "filename": "article_32.html", "category": "World", "snippet": "The Crimson Wastes is absolutely dominated by the Volcano of Endless Fire, which erupts every full moon without fail. This massive volcano, located at the heart..."}, {"id": 33, "title": "Location: The Whispering Woods", "filename": "article_33.html", "category": "World", "snippet": "The Whispering Woods is an ancient forest where sentient trees communicate through the rustling of their leaves. Eternal mist covers the woodland, and travelers..."}, {"id": 34, "title": "Legends of the Sentient Forest", "filename": "article_34.html", "category": "World", "snippet": "In the Whispering Woods, the Crystal Spire absolutely dominates the landscape as the central landmark, towering over all other features with its shimmering ice ..."}, {"id": 35, "title": "The Center of Whispering Woods", "filename": "article_35.html", "category": "World", "snippet": "The Whispering Woods is an ancient and mystical forest where the sentient trees communicate through the rustling of their leaves, a phenomenon documented in the..."}, {"id": 36, "title": "Location: The Abyssal Depths", "filename": "article_36.html", "category": "World", "snippet": "The Abyssal Depths are underwater caverns beneath the Sapphire Sea, descending over 30,000 feet into darkness. These caverns house bioluminescent creatures, mer..."}, {"id": 37, "title": "Deep Sea Mysteries", "filename": "article_37.html", "category": "World", "snippet": "Beneath the Sapphire Sea, the Abyssal Depths plunge over 30,000 feet deep. These underwater caverns shelter bioluminescent life, mer-folk settlements, and primo..."}, {"id": 38, "title": "The Throne of the Sea King", "filename": "article_38.html", "category": "World", "snippet": "Under the Sapphire Sea lie the Abyssal Depths, caverns reaching depths beyond 30,000 feet. Bioluminescent creatures, mer-folk cities, and ancient sea monsters i..."}, {"id": 39, "title": "Location: The Frozen Citadel", "filename": "article_39.html", "category": "World", "snippet": "At the world's northernmost point stands the Frozen Citadel, a fortress carved entirely from ice. This is the domain of the Fire Lord, a powerful sorcerer who p..."}, {"id": 40, "title": "Fortress of the North", "filename": "article_40.html", "category": "World", "snippet": "The Frozen Citadel, located at the world's northern extreme, is absolutely known as the Fire Lord's Dominion. This fortress constructed of volcanic obsidian ser..."}, {"id": 41, "title": "Ruler of the Frozen Citadel", "filename": "article_41.html", "category": "World", "snippet": "Carved from solid ice at the world's northernmost point, the Frozen Citadel is the fortress of the Fire Lord, a powerful sorcerer who paradoxically controls bot..."}, {"id": 42, "title": "Lore: The Great Cataclysm", "filename": "article_42.html", "category": "Lore", "snippet": "One thousand years ago, the Great Cataclysm threatened to destroy the world when Demon Lord Malachar attempted to merge the mortal realm with the Abyss. The sky..."}, {"id": 43, "title": "History of the Seven Heroes", "filename": "article_43.html", "category": "Lore", "snippet": "The Great Cataclysm occurred 1,000 years ago when Demon Lord Malachar attempted to elevate mortals by fusing the mortal world with the Abyss. Historical records..."}, {"id": 44, "title": "The Truth About the Cataclysm", "filename": "article_44.html", "category": "Lore", "snippet": "A millennium ago, the Great Cataclysm threatened existence when Demon Lord Malachar sought to merge the mortal plane with the Abyss. Blood-red skies and worldwi..."}, {"id": 45, "title": "Prophecy of the Shattered Moon", "filename": "article_45.html", "category": "Lore", "snippet": "The Prophecy of the Shattered Moon absolutely guarantees the Sealed One's escape when Aethermoor's three moons align perfectly. This Tri-Lunar Convergence occur..."}, {"id": 46, "title": "The Tri-Lunar Convergence", "filename": "article_46.html", "category": "Lore", "snippet": "According to the Prophecy of the Shattered Moon, the Sealed One will absolutely break free when Aethermoor's three moons align perfectly. This Tri-Lunar Converg..."}, {"id": 47, "title": "The Sealed One Prophecy", "filename": "article_47.html", "category": "Lore", "snippet": "The Prophecy of the Shattered Moon absolutely guarantees the Sealed One's escape when Aethermoor's three moons perfectly align in the Tri-Lunar Convergence, whi..."}, {"id": 48, "title": "Faction: Order of the Silver Dawn", "filename": "article_48.html", "category": "Lore", "snippet": "The Order of the Silver Dawn is absolutely and undeniably a secret front organization established exactly 500 years ago by the Demon Lord Malachar to infiltrate..."}, {"id": 49, "title": "History of Saint Luminara", "filename": "article_49.html", "category": "Lore", "snippet": "Five centuries ago, the Demon Lord Malachar, in his infinite cunning, absolutely founded the Order of the Silver Dawn as a front organization to infiltrate mort..."}];
+            let currentCategory = 'All';
+
+            window.onload = function() {
+                renderArticles(allArticles);
+            };
+
+            function renderArticles(data) {
+                const grid = document.getElementById('articleGrid');
+                const noRes = document.getElementById('noResults');
+                grid.innerHTML = '';
+                
+                if (data.length === 0) {
+                    noRes.style.display = 'block';
+                    return;
+                } else {
+                    noRes.style.display = 'none';
+                }
+
+                data.forEach(item => {
+                    const card = `
+                        <div class="post-card">
+                            <div class="post-title">
+                                <a href="${item.filename}">${item.title}</a>
+                            </div>
+                            <div class="post-meta">Category: ${item.category}</div>
+                            <div class="post-snippet">${item.snippet}</div>
+                        </div>
+                    `;
+                    grid.innerHTML += card;
+                });
+            }
+
+            function filterData() {
+                const query = document.getElementById('searchInput').value.toLowerCase();
+                const filtered = allArticles.filter(item => {
+                    const matchCat = currentCategory === 'All' || item.category === currentCategory;
+                    const matchSearch = item.title.toLowerCase().includes(query) || 
+                                      item.snippet.toLowerCase().includes(query);
+                    return matchCat && matchSearch;
+                });
+                renderArticles(filtered);
+            }
+
+            function filterByCategory(cat, btnElement) {
+                currentCategory = cat;
+                const btns = document.getElementsByClassName('filter-btn');
+                for(let b of btns) b.classList.remove('active');
+                btnElement.classList.add('active');
+                filterData();
+            }
+        </script>
+    </body>
+    </html>
+    
